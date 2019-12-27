@@ -1,0 +1,21 @@
+version: "3"
+services:
+  # Service for the Postgres database
+  db:
+    # Pull the latest 'postgres' image
+    image: "postgres"
+    container_name: "postgres_docker"
+
+    # Postgres environment parameters
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dbapp
+
+    # Bind mount the default Postgres port
+    ports:
+      - "54321:5432"
+
+    # Bind mount local volume for Postgres data
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
