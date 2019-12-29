@@ -1,5 +1,7 @@
 (ns clj-commerce.core
   (:require
+    [clj-commerce.admin :as adm]
+    [clj-commerce.site :as site]
     [day8.re-frame.http-fx]
     [reagent.core :as r]
     [re-frame.core :as rf]
@@ -12,44 +14,43 @@
     [clojure.string :as string])
   (:import goog.History))
 
-(defn nav-link [uri title page]
-  [:a.navbar-item
-   {:href   uri
-    :class (when (= page @(rf/subscribe [:page])) :is-active)}
-   title])
 
-(defn navbar []
-  (r/with-let [expanded? (r/atom false)]
-    [:nav.navbar.is-info>div.container
-     [:div.navbar-brand
-      [:a.navbar-item {:href "/" :style {:font-weight :bold}} "clj-commerce"]
-      [:span.navbar-burger.burger
-       {:data-target :nav-menu
-        :on-click #(swap! expanded? not)
-        :class (when @expanded? :is-active)}
-       [:span][:span][:span]]]
-     [:div#nav-menu.navbar-menu
-      {:class (when @expanded? :is-active)}
-      [:div.navbar-start
-       [nav-link "#/" "Home" :home]
-       [nav-link "#/about" "About" :about]]]]))
+
+;(defn navbar []
+;  (r/with-let [expanded? (r/atom false)]
+;    [:nav.navbar.is-info>div.container
+;     [:div.navbar-brand
+;      [:a.navbar-item {:href "/" :style {:font-weight :bold}} "clj-commerce"]
+;      [:span.navbar-burger.burger
+;       {:data-target :nav-menu
+;        :on-click #(swap! expanded? not)
+;        :class (when @expanded? :is-active)}
+;       [:span][:span][:span]]]
+;     [:div#nav-menu.navbar-menu
+;      {:class (when @expanded? :is-active)}
+;      [:div.navbar-start
+;       [nav-link "#/" "Home" :home]
+;       [nav-link "#/admin" "Admin" :admin]
+;       [nav-link "#/about" "About" :about]]]]))
+;
+;(defn navlinks
+;  "Navlinks to assing to the navbar"
+;  '[
+;    [nav-link "#/" "Home" :home]])
 
 (defn about-page []
   [:section.section>div.container>div.content
    [:img {:src "/img/warning_clojure.png"}]])
 
-(defn home-page []
-  [:section.section>div.container>div.content
-   (when-let [docs @(rf/subscribe [:docs])]
-     [:div {:dangerouslySetInnerHTML {:__html (md->html docs)}}])])
 
 (def pages
-  {:home #'home-page
+  {:home #'site/home-page
+   :admin #'adm/admin-page
    :about #'about-page})
 
 (defn page []
   [:div
-   [navbar]
+   [adm/navbar-admin "Admin Clojure Commerce"]
    [(pages @(rf/subscribe [:page]))]])
 
 ;; -------------------------
@@ -58,7 +59,9 @@
 (def router
   (reitit/router
     [["/" :home]
-     ["/about" :about]]))
+     ["/about" :about]
+     ["/admin" :admin]
+     ]))
 
 ;; -------------------------
 ;; History
