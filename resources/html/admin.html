@@ -6,31 +6,23 @@
       <title>ADMIN</title>
   </head>
   <body>
-    
-    <div id="app">
-      <section class="section">
-        <div class="container is-fluid">
-          <div class="content">
-            <h4 class="title">Welcome to clj-commerce</h4>
-            <p>If you're seeing this message, that means you haven't yet compiled your ClojureScript!</p>
-            <p>Please run <code>lein figwheel</code> to start the ClojureScript compiler and reload the page.</p>
-            <h4>For better ClojureScript development experience in Chrome follow these steps:</h4>
-            <ul>
-              <li>Open DevTools
-              <li>Go to Settings ("three dots" icon in the upper right corner of DevTools > Menu > Settings F1 > General > Console)
-              <li>Check-in "Enable custom formatters"
-              <li>Close DevTools
-              <li>Open DevTools
-            </ul>
-            <p>See <a href="http://www.luminusweb.net/docs/clojurescript.md">ClojureScript</a> documentation for further details.</p>
+      <nav id="navbar"></nav>
+      <div class="container">
+          <div class="columns">
+              <div class="column is-3">
+                  <aside id="asidemenu"></aside>
+              </div>
+              <div class="column is-9">
+                  <div id="app"></div>
+              </div>
           </div>
-        </div>
-      </section>
-    </div>
+      </div>
+      
 
-    <!-- scripts and styles -->
+      <!-- scripts and styles -->
     {% style "/assets/bulma/css/bulma.min.css" %}
     {% style "/assets/material-icons/css/material-icons.min.css" %}
+    {% style "/assets/fontawesome/css/font-awesome.min.css" %}
     {% style "/css/screen.css" %}
     {% style "/css/admin.css" %}
 

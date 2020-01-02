@@ -1,20 +1,15 @@
 (ns clj-commerce.admin
   (:require
-    [day8.re-frame.http-fx]
-    [reagent.core :as r]
-    [re-frame.core :as rf]
-    [goog.events :as events]
-    [goog.history.EventType :as HistoryEventType]
-    [markdown.core :refer [md->html]]
-    [clj-commerce.ajax :as ajax]
-    [clj-commerce.events]
-    [reitit.core :as reitit]
-    [clojure.string :as string]))
+   [clj-commerce.admin.statistics :as stat]
+   [clj-commerce.admin.eventssection :as eventsect]
+   [clj-commerce.admin.searchform :as searchform]
+   [markdown.core :refer [md->html]]
+   [clojure.string :as string]))
 
 (defn nav-link [uri title page]
   [:a.navbar-item
    {:href   uri
-    :class (when (= page @(rf/subscribe [:page])) :is-active)}
+    }
    title])
 
 (defn navbar-admin [title]
@@ -52,12 +47,34 @@
       ]]
     ]])
 
-(defn content-body []
-  [:h2 "Hello word"])
+(defn bread-crumbs []
+  [:nav.breadcrumb {:aria-label "breadcrumbs"}
+   [:ul
+    [:li [:a {:href "../"} "Bulma 1"]]
+    [:li [:a {:href "../"} "Bulma 2"]]
+    [:li.is-active [:a {:href "../"} "Bulma 3"]]
+    ]])
+
+
+(defn hero-section []
+  [:section.hero.is-info.welcome.is-small
+   [:div.hero-body
+    [:div.container
+     [:h1.title "CLJ Commerce"]
+     [:h2.sub-title "A Wonderful ECommerce written in Clojure"]]]])
 
 (defn admin-page []
-  [:div.container
-   [:div.columns
-    [:div.column.is-3
-     aside-menu]
-    [:div.column.is-9 content-body]]])
+  [:div
+   [bread-crumbs]
+   [:section
+    [hero-section]
+    [stat/statistics-section]
+    [:div.columns
+     [:div.column.is-6
+      [eventsect/eventslist-section]
+     ]
+     [:div.column.is-6
+      [searchform/search-form "Prodotti"]
+      [searchform/search-form "Ordini"]
+      [:h2 "HELLOOO"]]]]
+    ])

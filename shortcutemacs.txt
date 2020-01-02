@@ -1,0 +1,2 @@
+C-a C-SPACE C-n M-w C-y             -- DUPLICATE LINE
+M-! touch __init__.py RET           -- CREATE NEW FILE

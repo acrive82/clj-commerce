@@ -5,7 +5,17 @@ html, body {
   height: 100%;
   background: #ECF0F3;
 }
-nav.navbar {
+
+.hero {
+    margin: 0 0 10px 0;
+}
+
+.zero {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+nav.navbar {4
   border-top: 4px solid #276cda;
   margin-bottom: 1rem;
 }

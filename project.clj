@@ -14,7 +14,6 @@
                  [com.cognitect/transit-clj "0.8.319"]
                  [conman "0.8.4"]
                  [cprop "0.1.14"]
-                 [day8.re-frame/http-fx "0.1.6"]
                  [expound "0.8.1"]
                  [funcool/struct "1.4.0"]
                  [luminus-jetty "0.1.7"]
@@ -35,15 +34,16 @@
                  [org.webjars.npm/bulma "0.8.0"]
                  [org.webjars.npm/material-icons "0.3.1"]
                  [org.webjars/webjars-locator "0.38"]
-                 [re-frame "0.10.9"]
                  [reagent "0.9.0-rc3"]
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.8.0"]
                  [ring/ring-defaults "0.3.2"]
-                 [selmer "1.12.17"]]
+                 [selmer "1.12.17"]
+                 [org.webjars.bower/fontawesome "4.7.0"]
+                 ]
 
   :min-lein-version "2.0.0"
-  
+
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :test-paths ["test/clj"]
   :resource-paths ["resources" "target/cljsbuild"]
@@ -59,7 +59,7 @@
    :nrepl-port 7002
    :css-dirs ["resources/public/css"]
    :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
-  
+
 
   :profiles
   {:uberjar {:omit-source true
@@ -77,7 +77,7 @@
                  :closure-warnings
                  {:externs-validation :off :non-standard-jsdoc :off}
                  :externs ["react/externs/react.js"]}}}}
-             
+
              :aot :all
              :uberjar-name "clj-commerce.jar"
              :source-paths ["env/prod/clj"]
@@ -93,7 +93,6 @@
                                  [figwheel-sidecar "0.5.19"]
                                  [pjstadig/humane-test-output "0.10.0"]
                                  [prone "2019-07-08"]
-                                 [re-frisk "0.5.4.1"]
                                  [ring/ring-devel "1.8.0"]
                                  [ring/ring-mock "0.4.0"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.24.1"]
@@ -106,16 +105,13 @@
                      :figwheel {:on-jsload "clj-commerce.core/mount-components"}
                      :compiler
                      {:output-dir "target/cljsbuild/public/js/out"
-                      :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}
-                      :optimizations :none
-                      :preloads [re-frisk.preload]
                       :output-to "target/cljsbuild/public/js/app.js"
                       :asset-path "/js/out"
                       :source-map true
                       :main "clj-commerce.app"
                       :pretty-print true}}}}
-                  
-                  
+
+
                   :doo {:build "test"}
                   :source-paths ["env/dev/clj"]
                   :resource-paths ["env/dev/resources"]
@@ -124,7 +120,7 @@
                                (pjstadig.humane-test-output/activate!)]}
    :project/test {:jvm-opts ["-Dconf=test-config.edn"]
                   :resource-paths ["env/test/resources"]
-                  :cljsbuild 
+                  :cljsbuild
                   {:builds
                    {:test
                     {:source-paths ["src/cljc" "src/cljs" "test/cljs"]
@@ -133,7 +129,7 @@
                       :main "clj-commerce.doo-runner"
                       :optimizations :whitespace
                       :pretty-print true}}}}
-                  
+
                   }
    :profiles/dev {}
    :profiles/test {}})
