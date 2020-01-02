@@ -47,7 +47,7 @@
       ]]
     ]])
 
-(defn bread-crumbs []
+(defn- bread-crumbs []
   [:nav.breadcrumb {:aria-label "breadcrumbs"}
    [:ul
     [:li [:a {:href "../"} "Bulma 1"]]
@@ -56,7 +56,7 @@
     ]])
 
 
-(defn hero-section []
+(defn- hero-section []
   [:section.hero.is-info.welcome.is-small
    [:div.hero-body
     [:div.container

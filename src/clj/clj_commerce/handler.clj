@@ -3,7 +3,6 @@
     [clj-commerce.middleware :as middleware]
     [clj-commerce.layout :refer [error-page]]
     [clj-commerce.routes.home :refer [home-routes]]
-    [clj-commerce.routes.admin :refer [admin-routes]]
     [reitit.ring :as ring]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.webjars :refer [wrap-webjars]]
@@ -18,8 +17,7 @@
                 :start
                 (ring/ring-handler
                   (ring/router
-                    [(home-routes)
-                     (admin-routes)])
+                    [(home-routes)])
                   (ring/routes
                     (ring/create-resource-handler
                       {:path "/"})
